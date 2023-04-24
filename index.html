@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script src="https://cdn.socket.io/4.6.1/socket.io.min.js" crossorigin="anonymous"></script>
+        <script
+  src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h2>Hello !!!</h2>
+        <span> User Name : <input type="text" id="username"/><span>
+        <button id="connect">Connect</button>
+        <p id="serverinfo"></p>
+        <script>
+            $(document).ready(function(){
+
+                $('#connect').on('click', () => {
+                    if($('#username').val()){
+                        connectToSocket($('#username').val());
+                    }else{
+                        alert("Enter UserName")
+                    }
+                })
+                function connectToSocket(username){
+                    const socket = io({
+                        auth: {
+                            username: username
+                        }
+                    });
+                    socket.connect();
+                    socket.on("connect", () => {
+                        console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+                    });
+                    socket.on("connect_failed", function(){
+                        socket.connect();
+                    })
+                    socket.on('Hi', (data) => {
+                        $('#serverinfo').text(data);
+                    })
+                    socket.onAny((event, ...args) => {
+                        console.log(event, args)
+                    })
+                }
+                
+            });
+
+        </script>
+    </body>
+</html>

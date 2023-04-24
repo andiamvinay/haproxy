@@ -1,0 +1,38 @@
+siege -c 10 -r 10 -b http://localhost/
+https://www.haproxy.com/documentation/aloha/latest/load-balancing/health-checks/tcp/
+https://www.linode.com/docs/guides/load-testing-with-siege/
+siege -c 10 -r 10 -d 1 http://localhost/
+
+
+haproxy -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -sf $(cat /run/haproxy.pid) -x /var/run/haproxy.sock
+
+sudo haproxy -f ./config.cfg
+
+https://www.haproxy.com/blog/haproxy-apis/#:~:text=The%20HAProxy%20Runtime%20API,-The%20HAProxy%20Runtime&text=Built%20directly%20into%20the%20codebase,of%20the%20load%20balancer%20itself.&text=The%20defining%20trait%20of%20the,HAProxy%20configuration%20file%20on%20disk.
+
+https://www.haproxy.com/blog/hitless-reloads-with-haproxy-howto/
+
+
+stats socket /var/run/api.sock user vinay group everyone mode 660 level admin expose-fd listeners
+
+
+siege -c 10 -r 10 -b -t 10M http://localhost/
+
+server server3 127.0.0.1:8003 check inter 1s
+
+haproxy -f ./config.cfg -p ./tmp/haproxy.pid -sf $(cat ./tmp/haproxy.pid)
+
+//TEST 1
+sudo haproxy -f ./config.cfg
+Uncomment 
+sudo haproxy -f ./config.cfg -p ./tmp/haproxy.pid -sf $(cat ./tmp/haproxy.pid)
+Check if the new server is getting req
+
+//TEST 2
+sudo haproxy -f ./config.cfg
+Uncomment 
+sudo haproxy -f ./config.cfg -p ./tmp/haproxy.pid -sf $(cat ./tmp/haproxy.pid)
+Stop Servers
+
+
+https://gist.github.com/Philmod/21b7c8fbd5a2bc20987141bc99966951
