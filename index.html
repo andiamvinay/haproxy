@@ -10,9 +10,14 @@
         <h2>Hello !!!</h2>
         <span> User Name : <input type="text" id="username"/><span>
         <button id="connect">Connect</button>
+        <p id="httpserverinfo"></p>
         <p id="serverinfo"></p>
         <script>
             $(document).ready(function(){
+                
+                $.get("/", function(data, status){
+                    $('#httpserverinfo').text(data);
+                });
 
                 $('#connect').on('click', () => {
                     if($('#username').val()){
@@ -21,8 +26,9 @@
                         alert("Enter UserName")
                     }
                 })
+
                 function connectToSocket(username){
-                    const socket = io({
+                    const socket = io(  {
                         auth: {
                             username: username
                         }

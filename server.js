@@ -37,6 +37,10 @@ app.head('/health', function (req, res) {
   res.sendStatus(200);
 });
 
+app.get('/server', function(req, res) {
+  res.send("Connected to " + port);
+})
+
 server.listen(port, () => {
   console.log('listening on *:' + port);
 });
