@@ -14,8 +14,8 @@
         <p id="serverinfo"></p>
         <script>
             $(document).ready(function(){
-                
-                $.get("/", function(data, status){
+
+                $.get("/server", function(data, status){
                     $('#httpserverinfo').text(data);
                 });
 
