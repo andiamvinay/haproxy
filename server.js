@@ -46,8 +46,9 @@ app.get('/logout', function(req, res) {
 })
 
 app.get('/callback', function(req, res) {
-  res.send("Callback page");
+   res.redirect('/');
 })
+
 server.listen(port, () => {
   console.log('listening on *:' + port);
 });
