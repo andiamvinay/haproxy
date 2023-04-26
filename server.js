@@ -46,7 +46,7 @@ app.get('/logout', function(req, res) {
 })
 
 app.get('/callback', function(req, res) {
-   res.redirect('/');
+   res.redirect(301, '/');
 })
 
 server.listen(port, () => {
