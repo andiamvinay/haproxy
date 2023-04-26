@@ -41,6 +41,13 @@ app.get('/server', function(req, res) {
   res.send("Connected to " + port);
 })
 
+app.get('/logout', function(req, res) {
+  res.send("User Logged Out");
+})
+
+app.get('/callback', function(req, res) {
+  res.send("Callback page");
+})
 server.listen(port, () => {
   console.log('listening on *:' + port);
 });
