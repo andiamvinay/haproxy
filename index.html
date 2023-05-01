@@ -40,7 +40,7 @@
                         url: "/server",
                         type: "GET",
                         beforeSend: function(xhr){xhr.setRequestHeader("Authorization", window.jwttoken);},
-                        success: function() { $('#httpserverinfo').text(data);}
+                        success: function(data) { $('#httpserverinfo').text(data);}
                     });    
                     $('#loginsuccess').show();
                 }
