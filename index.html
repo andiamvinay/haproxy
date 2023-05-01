@@ -15,6 +15,7 @@
         <div id="loginsuccess" style="display: none;">
             <span> User Name : <input type="text" id="username"/><span>
             <button id="connect">Connect</button>
+            <button id="serveragain">Server Again</button>
             <p id="httpserverinfo"></p>
             <p id="serverinfo"></p>
         </div>
@@ -34,6 +35,11 @@
                     })
                 })
 
+
+
+                $('#serveragain').on('click', () => {
+                    postlogin();
+                })
 
                 function postlogin(){
                     $.ajax({
