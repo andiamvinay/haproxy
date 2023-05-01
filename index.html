@@ -65,6 +65,9 @@
                         auth: {
                             username: username,
                             token: window.jwttoken,
+                        },
+                        extraHeaders: {
+                            "Authorization" : window.jwttoken
                         }
                     });
                     socket.connect();
