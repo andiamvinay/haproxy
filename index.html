@@ -8,16 +8,37 @@
     </head>
     <body>
         <h2>Hello !!!</h2>
-        <span> User Name : <input type="text" id="username"/><span>
-        <button id="connect">Connect</button>
-        <p id="httpserverinfo"></p>
-        <p id="serverinfo"></p>
+        <div id="login">
+            <span> Enter User Key : <input type="text" id="userkey"/><span>
+            <button id="auth">Auth</button>
+        </div>
+        <div id="loginsuccess" style="display: none;">
+            <span> User Name : <input type="text" id="username"/><span>
+            <button id="connect">Connect</button>
+            <p id="httpserverinfo"></p>
+            <p id="serverinfo"></p>
+        </div>
+        
         <script>
             $(document).ready(function(){
 
-                $.get("/server", function(data, status){
-                    $('#httpserverinfo').text(data);
-                });
+
+                $('#auth').on('click', () => {
+
+                    $.get('/apisix/plugin/jwt/sign?key='+$('#userkey').val(), function(data, status)){
+                        alert("status");
+                        alert(data);
+                    }
+                })
+
+
+                function postlogin(){
+                    $.get("/server", function(data, status){
+                        $('#httpserverinfo').text(data);
+                    });     
+                    $('#loginsuccess').show();
+                }
+
 
                 $('#connect').on('click', () => {
                     if($('#username').val()){
