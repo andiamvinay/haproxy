@@ -24,10 +24,13 @@
 
 
                 $('#auth').on('click', () => {
-
+                    window.jwttoken = "";
                     $.get('/apisix/plugin/jwt/sign?key='+$('#userkey').val(), function(data, status){
-                        console.log(data)
-                        console.log(status)
+                        if(status && status == "success"){
+                            window.jwttoken = data;
+                            postlogin();
+                            $('#login').hide();
+                        }
                     })
                 })
 
