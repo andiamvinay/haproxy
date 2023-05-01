@@ -25,10 +25,10 @@
 
                 $('#auth').on('click', () => {
 
-                    $.get('/apisix/plugin/jwt/sign?key='+$('#userkey').val(), function(data, status)){
-                        alert("status");
-                        alert(data);
-                    }
+                    $.get('/apisix/plugin/jwt/sign?key='+$('#userkey').val(), function(data, status){
+                        console.log(data)
+                        console.log(status)
+                    })
                 })
 
 
