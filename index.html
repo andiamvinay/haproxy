@@ -36,9 +36,12 @@
 
 
                 function postlogin(){
-                    $.get("/server", function(data, status){
-                        $('#httpserverinfo').text(data);
-                    });     
+                    $.ajax({
+                        url: "/server",
+                        type: "GET",
+                        beforeSend: function(xhr){xhr.setRequestHeader("Authorization", window.jwttoken);},
+                        success: function() { $('#httpserverinfo').text(data);}
+                    });    
                     $('#loginsuccess').show();
                 }
 
@@ -54,7 +57,8 @@
                 function connectToSocket(username){
                     const socket = io(  {
                         auth: {
-                            username: username
+                            username: username,
+                            token: window.jwttoken,
                         }
                     });
                     socket.connect();
