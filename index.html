@@ -66,6 +66,7 @@
                             username: username,
                             token: window.jwttoken,
                         },
+                        {query: 'Authorization='+window.jwttoken},
                         extraHeaders: {
                             "Authorization" : window.jwttoken
                         }
