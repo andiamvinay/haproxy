@@ -6,7 +6,7 @@ siege -c 10 -r 10 -d 1 http://localhost/
 
 haproxy -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid -sf $(cat /run/haproxy.pid) -x /var/run/haproxy.sock
 
-sudo haproxy -f ./config.cfg
+sudo haproxy -f ./config1.cfg
 
 https://www.haproxy.com/blog/haproxy-apis/#:~:text=The%20HAProxy%20Runtime%20API,-The%20HAProxy%20Runtime&text=Built%20directly%20into%20the%20codebase,of%20the%20load%20balancer%20itself.&text=The%20defining%20trait%20of%20the,HAProxy%20configuration%20file%20on%20disk.
 
@@ -36,3 +36,88 @@ Stop Servers
 
 
 https://gist.github.com/Philmod/21b7c8fbd5a2bc20987141bc99966951
+
+
+
+===
+If you change your custom configuration, you can reload APISIX (without downtime) by issuing.
+docker exec -it apache-apisix apisix reload
+
+35.200.220.186
+
+
+
+//API or way to add remove servers manually
+docker run -d -p 9000:9000 -v
+
+docker build -t -v conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml --name docker-apisix_apisix-dashboard_1 apache/apisix-dashboard:3.0.1-alpine
+
+edd1c9f034335f136f87ad84b625c8f1
+
+curl http://35.200.220.186:9180/apisix/admin/routes/jas -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
+{
+    "uri": "/apisix/plugin/jwt/sign",
+    "plugins": {
+        "public-api": {}
+    }
+}'
+
+curl http://35.200.220.186:9180/apisix/plugin/jwt/sign?key=userkey -i
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJ1c2Vya2V5IiwiZXhwIjoxNjgzMDQwMTM5fQ.NIsKrVn0m6jOk75L2EPv00FbKfBDbuMZpO9a-miVAdU
+
+
+
+docker run -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak
+
+./kcadm.sh config credentials --server http://35.200.220.186:8080 --realm master --user admin
+
+kcadm.sh update realms/master -s sslRequired=NONE
+
+CGxepuBKekBh1X4sPV01sHmvbthX8XZI
+
+stclient
+
+strealm
+
+http://35.200.220.186:9080/callback
+
+http://35.200.220.186:8080/realms/strealm/.well-known/openid-configuration
+
+
+bqJT8RzngmYXtne3aJTBYXcUNHdxhBe7
+
+
+{
+  "_meta": {
+    "disable": true
+  },
+  "bearer_only": false,
+  "client_id": "stclientsocket",
+  "client_secret": "bqJT8RzngmYXtne3aJTBYXcUNHdxhBe7",
+  "discovery": "http://35.200.220.186:8080/realms/strealm/.well-known/openid-configuration",
+  "realm": "strealm",
+  "scope": "openid profile"
+}
+
+curl -L -X POST 'http://localhost:8080/auth/realms/whatever-realm/protocol/openid-connect/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=clientid-03' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'client_secret=ec78c6bb-8339-4bed-9b1b-e973d27107dc' \
+--data-urlencode 'scope=openid' \
+--data-urlencode 'username=emuhamma' \
+--data-urlencode 'password=1'
+
+
+curl -L -X POST 'http://35.200.220.186:8080/realms/strealm/protocol/openid-connect/token' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'client_id=stclient' \
+  --data-urlencode 'grant_type=password' \
+  --data-urlencode 'client_secret=bqJT8RzngmYXtne3aJTBYXcUNHdxhBe7' \
+  --data-urlencode 'scope=openid profile' \
+  --data-urlencode 'username=admin' \
+  --data-urlencode 'password=trengeadmin'
+
+
+

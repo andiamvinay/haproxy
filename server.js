@@ -14,7 +14,7 @@ const path = require('path');
 const io = new Server(server, {
 	cors: {
     	origin: '*'
-  	}
+  	},
 });
 //io.adapter(createAdapter(pubClient, subClient));
 

@@ -1,0 +1,40 @@
+{
+    "apps": [
+        {
+            "name": "TICKER1",
+            "cwd": "./speed-trade-ticker",
+            "script": "npm",
+            "args": "start --grpcport=5001 --ip=127.0.0.1 --id=TICKER1"
+        },
+        {
+            "name": "TICKER2",
+            "cwd": "./speed-trade-ticker",
+            "script": "npm",
+            "args": "start --grpcport=5002 --ip=127.0.0.1 --id=TICKER2"
+        },
+        {
+            "name": "RM",
+            "cwd": "./speed-trade-router-monitor",
+            "script": "npm",
+            "args": "start --grpcport=7001 --ip=127.0.0.1 --id=ROUTER_MONITOR"
+        },
+        {
+            "name": "SOCKET1",
+            "cwd": "./speed-trade-socket",
+            "script": "npm",
+            "args": "start --socketport=6001 --ip=* --id=SOCKET1 --redishost=localhost:6379"
+        },
+        {
+            "name": "SOCKET2",
+            "cwd": "./speed-trade-socket",
+            "script": "npm",
+            "args": "start --socketport=6002 --ip=* --id=SOCKET1 --redishost=localhost:6379"
+        },
+        {
+            "name": "UI",
+            "cwd": "./nuxt-iam",
+            "script": "npm",
+            "args": "run dev -- --port 80"
+        },
+    ]
+}
